@@ -14,6 +14,7 @@ namespace questionnaire.BackAdmin
         private bool _isEditMode = false;
 
         private QuesContentsManager _mgrQuesContents = new QuesContentsManager();
+        //private QuesDetailManager _mgrQuesDetail = new QuesDetailManager();
         private QuesTypeManager _mgrQuesType = new QuesTypeManager();
         private CQManager _mgrCQ = new CQManager();
 
@@ -55,9 +56,6 @@ namespace questionnaire.BackAdmin
         /// <summary> 新增模式初始化 </summary>
         private void InitCreateMode()
         {
-            //this.txtStartDate.Text = DateTime.Now.ToString();
-            //this.txtEndDate.Text = string.Empty;
-            //this.ckbPaper.Checked = true;
         }
         /// <summary> 編輯模式初始化 </summary>
         private void InitEditMode()
@@ -91,7 +89,7 @@ namespace questionnaire.BackAdmin
             {
                 this.txtQuesTitle.Text = this.ddlQuesType.SelectedItem.ToString();
                 this.txtQuesAns.Text = CQs.CQChoices;
-                this.ddlQuesType.SelectedIndex = CQs.QuesTypeID + 1;
+                this.ddlAnsType.SelectedIndex = CQs.QuesTypeID - 1;
 
                 var isEnable = CQs.CQIsEnable;
                 if (isEnable)
@@ -99,6 +97,11 @@ namespace questionnaire.BackAdmin
                     this.ckbMustAns.Checked = true;
                 }
             }
+        }
+
+        protected void btnPaperCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("listPageA.aspx");
         }
     }
 }

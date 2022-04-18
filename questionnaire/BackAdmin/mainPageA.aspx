@@ -36,7 +36,7 @@
                 <br />
                 <asp:CheckBox ID="ckbPaper" runat="server" Text="已啟用" Checked="true" />
                 <br />
-                <asp:Button ID="btnPaperCancel" runat="server" Text="取消" />
+                <asp:Button ID="btnPaperCancel" runat="server" Text="取消" OnClick="btnPaperCancel_Click" />
                 &emsp;&emsp;&emsp;&emsp;&emsp;
                 <asp:Button ID="btnPaperSend" runat="server" Text="送出" />
             </p>
@@ -45,17 +45,17 @@
         <div id="question" class="tab-pane fade">
             <p>
                 <asp:Literal ID="ltlQuesType" runat="server">種類</asp:Literal>
-                <asp:DropDownList ID="ddlQuesType" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="ddlQuesType" runat="server"></asp:DropDownList>&emsp;&emsp;
                 <asp:Button ID="btnUse" runat="server" Text="填入" OnClick="btnUse_Click" />
                 <br />
                 <br />
                 <asp:Literal ID="ltlQuesTitle" runat="server">問題</asp:Literal>
-                <asp:TextBox ID="txtQuesTitle" runat="server"></asp:TextBox>&nbsp;
+                <asp:TextBox ID="txtQuesTitle" runat="server" Width="220"></asp:TextBox>&nbsp;
                 <asp:DropDownList ID="ddlAnsType" runat="server"></asp:DropDownList>&nbsp;
                 <asp:CheckBox ID="ckbMustAns" runat="server" Text="必填" />
                 <br />
                 <asp:Literal ID="ltlQuesAns" runat="server">回答</asp:Literal>
-                <asp:TextBox ID="txtQuesAns" runat="server"></asp:TextBox>&nbsp;
+                <asp:TextBox ID="txtQuesAns" runat="server" Width="220" TextMode="MultiLine"></asp:TextBox>&nbsp;
                 <span>﹝多個答案以；分隔﹞</span>&emsp;
                 <asp:Button ID="btnAdd" runat="server" Text="加入" OnClick="btnAdd_Click" /><br />
             </p>
@@ -71,16 +71,16 @@
                     <th></th>
                 </tr>
                 <tr>
-                    <td>
+                    <td width="30px">
                         <asp:CheckBox ID="CheckBox3" runat="server" />
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
+                    <td width="50px"></td>
+                    <td width="200px"></td>
+                    <td width="120px"></td>
+                    <td width="50px">
                         <asp:CheckBox ID="CheckBox4" runat="server" />
                     </td>
-                    <td><a>編輯</a></td>
+                    <td width="50px"><a>編輯</a></td>
                 </tr>
             </table>
             <p></p>
@@ -101,12 +101,13 @@
                         <th>觀看細節</th>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><a>前往</a></td>
+                        <td width="60px"></td>
+                        <td width="120px"></td>
+                        <td width="150px"></td>
+                        <td width="80px"><a>前往</a></td>
                     </tr>
                 </table>
+                <br />
                 <span id='table_pageA2'></span>
 
             </asp:PlaceHolder>
@@ -130,7 +131,7 @@
         </div>
         <div id="statistic" class="tab-pane fade">
             <p>
-                ddd
+                
             </p>
         </div>
     </div>

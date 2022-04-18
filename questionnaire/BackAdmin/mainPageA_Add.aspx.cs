@@ -18,8 +18,6 @@ namespace questionnaire.BackAdmin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
             if (!IsPostBack)
             {
                 //問題類型下拉繫結
@@ -72,7 +70,7 @@ namespace questionnaire.BackAdmin
             {
                 this.txtQuesTitle.Text = this.ddlQuesType.SelectedItem.ToString();
                 this.txtQuesAns.Text = CQs.CQChoices;
-                this.ddlQuesType.SelectedIndex = CQs.QuesTypeID;
+                this.ddlAnsType.SelectedIndex = CQs.QuesTypeID - 1;
 
                 var isEnable = CQs.CQIsEnable;
                 if (isEnable)
@@ -103,6 +101,11 @@ namespace questionnaire.BackAdmin
             Account account = new AccountManager().GetCurrentUser();
 
             this._mgrQuesContents.CreateQues(model, account.AccountID);
+        }
+
+        protected void btnPaperCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("listPageA.aspx");
         }
     }
 }

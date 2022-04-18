@@ -36,7 +36,7 @@
                 <br />
                 <asp:CheckBox ID="ckbPaperEnable" runat="server" Text="已啟用" Checked="true" />
                 <br />
-                <asp:Button ID="btnPaperCancel" runat="server" Text="取消" />
+                <asp:Button ID="btnPaperCancel" runat="server" Text="取消" OnClick="btnPaperCancel_Click" />
                 &emsp;&emsp;&emsp;&emsp;&emsp;
                 <asp:Button ID="btnPaperSend" runat="server" Text="送出" OnClick="btnPaperSend_Click" />
             </p>
@@ -45,17 +45,17 @@
         <div id="question" class="tab-pane fade">
             <p>
                 <asp:Literal ID="ltlQuesType" runat="server">種類</asp:Literal>
-                <asp:DropDownList ID="ddlQuesType" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="ddlQuesType" runat="server"></asp:DropDownList>&emsp;&emsp;
                 <asp:Button ID="btnUse" runat="server" Text="填入" OnClick="btnUse_Click" />
                 <br />
                 <br />
                 <asp:Literal ID="ltlQuesTitle" runat="server">問題</asp:Literal>
-                <asp:TextBox ID="txtQuesTitle" runat="server"></asp:TextBox>&nbsp;
+                <asp:TextBox ID="txtQuesTitle" runat="server" Width="220"></asp:TextBox>&nbsp;
                 <asp:DropDownList ID="ddlAnsType" runat="server"></asp:DropDownList>&nbsp;
                 <asp:CheckBox ID="ckbMustAns" runat="server" Text="必填" />
                 <br />
                 <asp:Literal ID="ltlQuesAns" runat="server">回答</asp:Literal>
-                <asp:TextBox ID="txtQuesAns" runat="server"></asp:TextBox>&nbsp;
+                <asp:TextBox ID="txtQuesAns" runat="server" Width="220" TextMode="MultiLine"></asp:TextBox>&nbsp;
                 <span>﹝多個答案以；分隔﹞</span>&emsp;
                 <asp:Button ID="btnAdd" runat="server" Text="加入" /><br />
             </p>
