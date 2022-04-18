@@ -92,6 +92,34 @@ namespace questionnaire.Managers
             }
         }
 
+        public Content GetQuesContent(int titleID)
+        {
+            try
+            {
+                using (ContextModel contextModel = new ContextModel())
+                {
+                    var query =
+                        from item in contextModel.Contents
+                        where item.TitleID == titleID
+                        select item;
+
+                    //取得Account所有資料
+                    var Ques = query.FirstOrDefault();
+
+                    //檢查是否存在
+                    if (Ques != null)
+                        return Ques;
+
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog("QuesContentsManager.GetQuesContent", ex);
+                throw;
+            }
+        }
+
         /// <summary>
         /// 輸入ID取得問卷所有資料
         /// </summary>
@@ -158,19 +186,18 @@ namespace questionnaire.Managers
         /// 新增問卷
         /// </summary>
         /// <param name="ques"></param>
-        public void CreateQues(QuesContentsModel ques)
+        public void CreateQues(QuesContentsModel ques, Guid id)
         {
             try
             {
                 //新增資料
                 using (ContextModel contextModel = new ContextModel())
                 {
-                    ques.ID = Guid.NewGuid();
 
                     //建立新問卷
                     var newQues = new Content
                     {
-                        ID = ques.ID,
+                        ID = id,
                         Title = ques.Title,
                         Body = ques.Body,
                         StartDate = ques.StartDate,

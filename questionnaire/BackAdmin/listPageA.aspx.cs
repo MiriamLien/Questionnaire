@@ -1,4 +1,5 @@
 ﻿using questionnaire.Managers;
+using questionnaire.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +23,24 @@ namespace questionnaire.BackAdmin
 
         protected void ImgBtnDel_Click(object sender, ImageClickEventArgs e)
         {
+            string txt = string.Empty;
+            var account = this._mgrQuesContents.GetQuesContent(Convert.ToInt32(txt));
 
+            foreach (RepeaterItem item in this.rptList.Items)
+            {
+                CheckBox ckb = item.FindControl("ckbForDel") as CheckBox;
+
+                if (ckb != null && ckb.Checked)
+                {
+                    this._mgrQuesContents.DeleteQues(account.ID);
+                }
+            }
         }
 
         protected void ImgBtnAdd_Click(object sender, ImageClickEventArgs e)
         {
             //導至新建頁面
-            Response.Redirect("mainPageA.aspx");
+            Response.Redirect("mainPageA_Add.aspx");
         }
     }
 }

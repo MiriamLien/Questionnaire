@@ -42,8 +42,8 @@
                     <td><%# Eval("ID") %></td>
                     <td><a><%# Eval("Title") %></a></td>
                     <td><%# Eval("IsEnable") %></td>
-                    <td><%# Eval("StartDate") %></td>
-                    <td><%# Eval("EndDate") %></td>
+                    <td><%# Eval("StartDate", "{0:yyyy/MM/dd}") %></td>
+                    <td><%# Eval("EndDate", "{0:yyyy/MM/dd}") %></td>
                     <td><a>前往</a></td>
                 </tr>
             </ItemTemplate>

@@ -7,7 +7,7 @@
     <asp:Repeater ID="rptCQ" runat="server">
         <ItemTemplate>
             <p><%# Eval("CQID") %>. <%# Eval("CQTitle") %></p>
-            <p><%# Eval("CQChoices") %></p>
+            <p><%# Eval("CQChoices") %></p><br />
         </ItemTemplate>
     </asp:Repeater>
 </asp:Content>

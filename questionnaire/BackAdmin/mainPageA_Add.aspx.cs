@@ -1,5 +1,6 @@
 ﻿using questionnaire.Managers;
 using questionnaire.Models;
+using questionnaire.ORM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +10,16 @@ using System.Web.UI.WebControls;
 
 namespace questionnaire.BackAdmin
 {
-    public partial class mainPageA : System.Web.UI.Page
+    public partial class mainPageA_Add : System.Web.UI.Page
     {
-        private bool _isEditMode = false;
-
         private QuesContentsManager _mgrQuesContents = new QuesContentsManager();
         private QuesTypeManager _mgrQuesType = new QuesTypeManager();
         private CQManager _mgrCQ = new CQManager();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
             if (!IsPostBack)
             {
                 //問題類型下拉繫結
@@ -37,50 +38,30 @@ namespace questionnaire.BackAdmin
 
                 this.ddlQuesType.Items.Insert(0, new ListItem("自訂問題", "0"));
             }
+        }
 
+        private bool CheckInput(out List<string> errorMsgList)
+        {
+            errorMsgList = new List<string>();
 
-            // 做編輯模式或新增模式的判斷
-            if (!string.IsNullOrWhiteSpace(this.Request.QueryString["ID"]))
-                this._isEditMode = true;
+            if (string.IsNullOrWhiteSpace(this.txtTitle.Text))
+                errorMsgList.Add("問卷名稱為必填。");
+
+            if (string.IsNullOrWhiteSpace(this.txtContent.Text))
+                errorMsgList.Add("描述內容為必填。");
+
+            if (string.IsNullOrWhiteSpace(this.txtStartDate.Text))
+                errorMsgList.Add("開始時間為必填。");
+
+            if (string.IsNullOrWhiteSpace(this.txtEndDate.Text))
+                errorMsgList.Add("結束時間為必填。");
+
+            if (errorMsgList.Count > 0)
+                return false;
             else
-                this._isEditMode = false;
-
-
-            if (this._isEditMode)
-                this.InitEditMode();
-            else
-                this.InitCreateMode();
+                return true;
         }
 
-        /// <summary> 新增模式初始化 </summary>
-        private void InitCreateMode()
-        {
-            //this.txtStartDate.Text = DateTime.Now.ToString();
-            //this.txtEndDate.Text = string.Empty;
-            //this.ckbPaper.Checked = true;
-        }
-        /// <summary> 編輯模式初始化 </summary>
-        private void InitEditMode()
-        {
-            string idText = this.Request.QueryString["ID"];
-            var quesList = this._mgrQuesContents.GetQuesContentsList(idText);
-
-            foreach (var item in quesList)
-            {
-                this.txtTitle.Text = item.Title;
-                this.txtContent.Text = item.Body;
-                this.txtStartDate.Text = item.StartDate.ToString();
-                this.txtEndDate.Text = item.EndDate.ToString();
-            }
-            
-            string url = this.Request.Url.LocalPath + "?ID=" + idText;
-            this.Response.Redirect(url);
-        }
-
-        protected void btnAdd_Click(object sender, EventArgs e)
-        {
-
-        }
 
         protected void btnUse_Click(object sender, EventArgs e)
         {
@@ -91,7 +72,7 @@ namespace questionnaire.BackAdmin
             {
                 this.txtQuesTitle.Text = this.ddlQuesType.SelectedItem.ToString();
                 this.txtQuesAns.Text = CQs.CQChoices;
-                this.ddlQuesType.SelectedIndex = CQs.QuesTypeID + 1;
+                this.ddlQuesType.SelectedIndex = CQs.QuesTypeID;
 
                 var isEnable = CQs.CQIsEnable;
                 if (isEnable)
@@ -99,6 +80,29 @@ namespace questionnaire.BackAdmin
                     this.ckbMustAns.Checked = true;
                 }
             }
+        }
+
+        protected void btnPaperSend_Click(object sender, EventArgs e)
+        {
+            List<string> errorMsgList = new List<string>();
+            if (!this.CheckInput(out errorMsgList))
+            {
+                this.lblMsg.Text = string.Join("<br/>", errorMsgList);
+                return;
+            }
+
+            QuesContentsModel model = new QuesContentsModel()
+            {
+                Title = this.txtTitle.Text.Trim(),
+                Content = this.txtContent.Text.Trim(),
+                StartDate = Convert.ToDateTime(this.txtStartDate.Text.Trim()),
+                EndDate = Convert.ToDateTime(this.txtEndDate.Text.Trim()),
+                IsEnable = this.ckbPaperEnable.Checked,
+            };
+
+            Account account = new AccountManager().GetCurrentUser();
+
+            this._mgrQuesContents.CreateQues(model, account.AccountID);
         }
     }
 }

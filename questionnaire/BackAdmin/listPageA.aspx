@@ -27,9 +27,9 @@
         </p>
     </div>
     <br />
+    <asp:ImageButton ID="ImgBtnDel" runat="server" ImageUrl="../images/deleteICON.png" Width="50" OnClick="ImgBtnDel_Click" /><br />&nbsp;
+    <asp:ImageButton ID="ImgBtnAdd" runat="server" ImageUrl="../images/addICON.png" Width="30" OnClick="ImgBtnAdd_Click" /><br />
     <br />
-    <asp:ImageButton ID="ImgBtnDel" runat="server" ImageUrl="../images/deleteICON.png" Width="80" OnClick="ImgBtnDel_Click" />
-    <asp:ImageButton ID="ImgBtnAdd" runat="server" ImageUrl="../images/addICON.png" Width="60" OnClick="ImgBtnAdd_Click" />
     <asp:PlaceHolder ID="plcList" runat="server">
         <table id="tblA">
             <tr>
@@ -45,10 +45,10 @@
                 <ItemTemplate>
                     <tr>
                         <td width="30px">
-                            <asp:CheckBox ID="CheckBox1" runat="server" />
+                            <asp:CheckBox ID="ckbForDel" runat="server" />
                         </td>
                         <td width="50px"><%# Eval("TitleID") %></td>
-                        <td width="250px"><a><%# Eval("Title") %></a></td>
+                        <td width="250px"><a href="mainPageA.aspx"><%# Eval("Title") %></a></td>
                         <td width="80px"><%# Eval("IsEnable") %></td>
                         <td width="130px"><%# Eval("StartDate", "{0:yyyy/MM/dd}") %></td>
                         <td width="130px"><%# Eval("EndDate", "{0:yyyy/MM/dd}") %></td>
@@ -58,6 +58,7 @@
             </asp:Repeater>
         </table>
     </asp:PlaceHolder>
+    <br />
     <span id='table_pageA'></span>
 
     <script>

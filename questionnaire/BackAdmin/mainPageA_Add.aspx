@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/BackAdmin/Admin.Master" AutoEventWireup="true" CodeBehind="mainPageA.aspx.cs" Inherits="questionnaire.BackAdmin.mainPageA" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/BackAdmin/Admin.Master" AutoEventWireup="true" CodeBehind="mainPageA_Add.aspx.cs" Inherits="questionnaire.BackAdmin.mainPageA_Add" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -18,8 +18,6 @@
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#paper">問卷</a></li>
         <li><a data-toggle="tab" href="#question">問題</a></li>
-        <li><a data-toggle="tab" href="#userInfo">填寫資料</a></li>
-        <li><a data-toggle="tab" href="#statistic">統計</a></li>
     </ul>
 
     <div class="tab-content">
@@ -33,12 +31,14 @@
                 <asp:TextBox ID="txtStartDate" runat="server" TextMode="Date" Width="250"></asp:TextBox><br />
                 <asp:Literal ID="ltlEndDate" runat="server">結束時間</asp:Literal>
                 <asp:TextBox ID="txtEndDate" runat="server" TextMode="Date" Width="250"></asp:TextBox><br />
+                <asp:Label runat="server" ID="lblMsg"></asp:Label>
                 <br />
-                <asp:CheckBox ID="ckbPaper" runat="server" Text="已啟用" Checked="true" />
+                <br />
+                <asp:CheckBox ID="ckbPaperEnable" runat="server" Text="已啟用" Checked="true" />
                 <br />
                 <asp:Button ID="btnPaperCancel" runat="server" Text="取消" />
                 &emsp;&emsp;&emsp;&emsp;&emsp;
-                <asp:Button ID="btnPaperSend" runat="server" Text="送出" />
+                <asp:Button ID="btnPaperSend" runat="server" Text="送出" OnClick="btnPaperSend_Click" />
             </p>
         </div>
 
@@ -57,7 +57,7 @@
                 <asp:Literal ID="ltlQuesAns" runat="server">回答</asp:Literal>
                 <asp:TextBox ID="txtQuesAns" runat="server"></asp:TextBox>&nbsp;
                 <span>﹝多個答案以；分隔﹞</span>&emsp;
-                <asp:Button ID="btnAdd" runat="server" Text="加入" OnClick="btnAdd_Click" /><br />
+                <asp:Button ID="btnAdd" runat="server" Text="加入" /><br />
             </p>
             <br />
             <asp:ImageButton ID="ImgBtnDel" runat="server" ImageUrl="../images/deleteICON.png" Width="50" />
@@ -71,16 +71,16 @@
                     <th></th>
                 </tr>
                 <tr>
-                    <td>
-                        <asp:CheckBox ID="CheckBox3" runat="server" />
+                    <td width="30">
+                        <asp:CheckBox ID="ckbForDel" runat="server" />
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <asp:CheckBox ID="CheckBox4" runat="server" />
+                    <td width="60"></td>
+                    <td width="200"></td>
+                    <td width="30"></td>
+                    <td width="100">
+                        <asp:CheckBox ID="ckbMustAns2" runat="server" />
                     </td>
-                    <td><a>編輯</a></td>
+                    <td width="60"><a>編輯</a></td>
                 </tr>
             </table>
             <p></p>
@@ -88,54 +88,5 @@
             &emsp;&emsp;&emsp;&emsp;&emsp;
             <asp:Button ID="btnQuesSend" runat="server" Text="送出" />
         </div>
-
-        <div id="userInfo" class="tab-pane fade">
-            <asp:PlaceHolder runat="server" ID="plcInfo1">
-                <asp:Button ID="Button3" runat="server" Text="匯出" />
-                <p></p>
-                <table id="tblUserInfo" border="1">
-                    <tr>
-                        <th>編號</th>
-                        <th>姓名</th>
-                        <th>填寫時間</th>
-                        <th>觀看細節</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><a>前往</a></td>
-                    </tr>
-                </table>
-                <span id='table_pageA2'></span>
-
-            </asp:PlaceHolder>
-
-            <asp:PlaceHolder runat="server" ID="plcInfo2" Visible="false">
-                <asp:Literal ID="ltlName" runat="server">姓名</asp:Literal>
-                <asp:TextBox ID="txtName" runat="server"></asp:TextBox>&emsp;&emsp;&emsp;
-                <asp:Literal ID="ltlPhone" runat="server">手機</asp:Literal>
-                <asp:TextBox ID="txtPhone" runat="server" TextMode="Phone"></asp:TextBox><br />
-                <asp:Literal ID="ltlEmail" runat="server">Email</asp:Literal>
-                <asp:TextBox ID="txtEmail" runat="server" TextMode="Email"></asp:TextBox>&emsp;&emsp;&emsp;
-                <asp:Literal ID="ltlAge" runat="server">年齡</asp:Literal>
-                <asp:TextBox ID="txtAge" runat="server" TextMode="Number"></asp:TextBox><br />
-                <br />
-                填寫時間
-                <p>2022/12/12 21:09:23</p>
-                <br />
-                <br />
-
-            </asp:PlaceHolder>
-        </div>
-        <div id="statistic" class="tab-pane fade">
-            <p>
-                ddd
-            </p>
-        </div>
     </div>
-
-    <script>
-        $("#tblUserInfo").tablepage($("#table_pageA2"), 10);
-    </script>
 </asp:Content>

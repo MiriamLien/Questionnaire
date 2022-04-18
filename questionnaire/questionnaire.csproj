@@ -78,6 +78,7 @@
     <Content Include="BackAdmin\CommonQuesPageA.aspx" />
     <Content Include="BackAdmin\listPageA.aspx" />
     <Content Include="BackAdmin\mainPageA.aspx" />
+    <Content Include="BackAdmin\mainPageA_Add.aspx" />
     <Content Include="bootstrap\css\bootstrap-grid.css" />
     <Content Include="bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="bootstrap\css\bootstrap-grid.rtl.css" />
@@ -141,6 +142,13 @@
     </Compile>
     <Compile Include="BackAdmin\mainPageA.aspx.designer.cs">
       <DependentUpon>mainPageA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BackAdmin\mainPageA_Add.aspx.cs">
+      <DependentUpon>mainPageA_Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BackAdmin\mainPageA_Add.aspx.designer.cs">
+      <DependentUpon>mainPageA_Add.aspx</DependentUpon>
     </Compile>
     <Compile Include="checkPage.aspx.cs">
       <DependentUpon>checkPage.aspx</DependentUpon>
